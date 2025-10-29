@@ -193,4 +193,4 @@ Bu proje **MIT Lisansı** altında lisanslanmıştır - daha fazla bilgi için [
 
 Uygulamanın çalışan versiyonuna Hugging Face Spaces üzerinden erişebilirsiniz:
 
-🔗 [Form Rehberi App - Hugging Face Space](https://huggingface.co/spaces/form-rehberi)
+🔗 [Form Rehberi App - Hugging Face Space](https://huggingface.co/spaces/oguzhanevci/FormRehberimguncel)
