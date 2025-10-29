@@ -105,65 +105,97 @@ Projenin çözümü, **Retrieval-Augmented Generation (RAG)** mimarisine dayanma
 - git (depoyu klonlamak için)
 - Google Gemini API Anahtarı
 
+## 🚀 Kurulum ve Çalıştırma
+
 ### 1. Depoyu Klonlayın
 ```bash
-git clone [https://github.com/oguzhan-evci/Form-Rehberim-Chatbot.git](https://github.com/oguzhan-evci/Form-Rehberim-Chatbot.git)
+git clone https://github.com/oguzhan-evci/Form-Rehberim-Chatbot.git
 cd Form-Rehberim-Chatbot
-2. Sanal Ortam Oluşturun ve Bağımlılıkları Kurun
-Bash
+```
 
+### 2. Sanal Ortam Oluşturun ve Bağımlılıkları Kurun
+```bash
 python -m venv venv
+
 # Linux/macOS
 source venv/bin/activate
+
 # Windows (Command Prompt)
 venv\Scripts\activate.bat
+
 # Windows (PowerShell)
 venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
-3. Google Gemini API Anahtarınızı Ayarlayın
-Uygulama, Google Gemini modelini kullanmak için bir API anahtarına ihtiyaç duyar. Bu anahtarı GEMINI_API_KEY adıyla bir ortam değişkeni olarak ayarlamalısınız:
+```
 
-Bash
+### 3. Google Gemini API Anahtarınızı Ayarlayın
 
+Uygulama, Google Gemini modelini kullanmak için bir API anahtarına ihtiyaç duyar. Bu anahtarı `GEMINI_API_KEY` adıyla bir ortam değişkeni olarak ayarlamalısınız:
+```bash
 # Linux/macOS
 export GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+
 # Windows (Command Prompt)
 set GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+
 # Windows (PowerShell)
 $env:GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
-YOUR_GEMINI_API_KEY yerine kendi Google Gemini API anahtarınızı yapıştırın.
+```
 
-4. FAISS Vektör Veritabanını Hazırlayın
-Proje, egzersiz bilgilerini depolamak için bir FAISS indeksi kullanır. faiss_exercise_index klasörünün projenizin kök dizininde olduğundan emin olun. Bu klasör ve içindeki indeks dosyaları depoya dahildir.
+`YOUR_GEMINI_API_KEY` yerine kendi Google Gemini API anahtarınızı yapıştırın.
 
-Not: Yeni egzersizler eklerseniz (hareket_ansiklopedisi klasörüne .md dosyaları), indeksi yeniden oluşturmanız gerekebilir.
+### 4. FAISS Vektör Veritabanını Hazırlayın
 
-5. Uygulamayı Çalıştırın
-Bash
+Proje, egzersiz bilgilerini depolamak için bir FAISS indeksi kullanır. `faiss_exercise_index` klasörünün projenizin kök dizininde olduğundan emin olun. Bu klasör ve içindeki indeks dosyaları depoya dahildir.
 
+**Not:** Yeni egzersizler eklerseniz (`hareket_ansiklopedisi` klasörüne .md dosyaları), indeksi yeniden oluşturmanız gerekebilir.
+
+### 5. Uygulamayı Çalıştırın
+```bash
 python app.py
-Uygulama genellikle http://127.0.0.1:7860 adresinde çalışacaktır.
+```
 
-❓ Kullanım Örnekleri
+Uygulama genellikle `http://127.0.0.1:7860` adresinde çalışacaktır.
+
+---
+
+## ❓ Kullanım Örnekleri
+
 Uygulama arayüzüne gittikten sonra, sohbet kutusuna aşağıdaki gibi sorular sorabilirsiniz:
 
-Kullanıcı: Merhaba! Asistan: Merhaba! Ben Egzersiz Form Rehberi Asistanı. Hangi egzersiz hakkında bilgi almak istersin?
+**Kullanıcı:** Merhaba!  
+**Asistan:** Merhaba! Ben Egzersiz Form Rehberi Asistanı. Hangi egzersiz hakkında bilgi almak istersin?
 
-Kullanıcı: Squat nasıl yapılır? Asistan: Squat (Çömelme), vücut ağırlığı ile yapılan, birden fazla kas grubunu çalıştıran temel bir egzersizdir. İşte adım adım nasıl yapıldığına dair bilgi:
+---
 
-Başlangıç Pozisyonu: Ayaklar omuz genişliğinde açık, parmak uçları hafifçe dışa dönük olmalı. Sırt dik, omuzlar geride ve karın kasları sıkı.
+**Kullanıcı:** Squat nasıl yapılır?  
+**Asistan:** Squat (Çömelme), vücut ağırlığı ile yapılan, birden fazla kas grubunu çalıştıran temel bir egzersizdir. İşte adım adım nasıl yapıldığına dair bilgi:
 
-Aşağı İniş: Kalçanızı geriye doğru iterken dizlerinizi bükün, sanki bir sandalyeye oturacakmış gibi...
+- **Başlangıç Pozisyonu**: Ayaklar omuz genişliğinde açık, parmak uçları hafifçe dışa dönük olmalı. Sırt dik, omuzlar geride ve karın kasları sıkı.
+- **Aşağı İniş**: Kalçanızı geriye doğru iterken dizlerinizi bükün, sanki bir sandalyeye oturacakmış gibi...
+- **Yukarı Kalkış**: Topuklarınızdan güç alarak başlangıç pozisyonuna geri dönün...
 
-Yukarı Kalkış: Topuklarınızdan güç alarak başlangıç pozisyonuna geri dönün...
+---
 
-Kullanıcı: Peki Lunge için ne söyleyebilirsin? Asistan: Lunge (Hamle), bacak kaslarını ayrı ayrı çalıştıran harika bir egzersizdir...
+**Kullanıcı:** Peki Lunge için ne söyleyebilirsin?  
+**Asistan:** Lunge (Hamle), bacak kaslarını ayrı ayrı çalıştıran harika bir egzersizdir...
 
-Kullanıcı: Bench Press hakkında bilgin var mı? Asistan: Üzgünüm, "Bench Press" hakkında doğrudan bir bilgiye sahip değilim. Ben, yalnızca vücut ağırlığı egzersizleri ansiklopedisindeki bilgilere dayanarak yanıt verebiliyorum. Başka bir vücut ağırlığı egzersizi hakkında bilgi almak ister misin?
+---
 
-📜 Lisans
-Bu proje MIT Lisansı altında lisanslanmıştır - daha fazla bilgi için LICENSE dosyasına bakın.
+**Kullanıcı:** Bench Press hakkında bilgin var mı?  
+**Asistan:** Üzgünüm, "Bench Press" hakkında doğrudan bir bilgiye sahip değilim. Ben, yalnızca vücut ağırlığı egzersizleri ansiklopedisindeki bilgilere dayanarak yanıt verebiliyorum. Başka bir vücut ağırlığı egzersizi hakkında bilgi almak ister misin?
 
-🌐 Canlı Demo
-Uygulamanın çalışan versiyonuna Hugging Face Spaces üzerinden erişebilirsiniz: 🔗 Form Rehberi App - Hugging Face Space
+---
+
+## 📜 Lisans
+
+Bu proje **MIT Lisansı** altında lisanslanmıştır - daha fazla bilgi için [LICENSE](LICENSE) dosyasına bakın.
+
+---
+
+## 🌐 Canlı Demo
+
+Uygulamanın çalışan versiyonuna Hugging Face Spaces üzerinden erişebilirsiniz:
+
+🔗 [Form Rehberi App - Hugging Face Space](https://huggingface.co/spaces/oguzhanevci/FormRehberimguncel)
