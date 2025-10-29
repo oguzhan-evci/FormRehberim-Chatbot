@@ -6,7 +6,7 @@ Bu proje, kullanıcılara vücut ağırlığı egzersizleri (Squat, Plank, Lunge
 
 Geliştirilen sohbet robotu, Python Flask kütüphanesi kullanılarak oluşturulan, kullanıcı dostu ve çok dilli (Türkçe/İngilizce) bir web arayüzü üzerinden sunulmaktadır. Temel hedef, yalnızca sağlanan veri setindeki bilgileri kullanarak yanıt üreten, halüsinasyonları en aza indiren ve doğal bir konuşma akışı sunan bir yapay zeka asistanı yaratmaktır.
 
-Projenin tüm kodları GitHub üzerinde açık kaynak olarak paylaşılmış ve geliştirme süreci bir Kaggle Notebook üzerinde yürütülmüştür.
+Projenin tüm kodları GitHub üzerinde açık kaynak olarak paylaşılmıştır.
 
 ## 🎯 Hedefler
 
@@ -26,19 +26,22 @@ Projenin temel hedefleri şunlardır:
 
 - **Kullanıcı Dostu Web Arayüzü**: Flask ve temel web teknolojileri (HTML/Jinja2, CSS, JS) ile erişilebilir, estetik, duyarlı (responsive) ve çok dilli bir arayüz tasarlamak; sohbet akışını, navigasyonu ve egzersiz listesi gibi ek özellikleri kullanıcıya sunmak.
 
-
 ## 📚 Veri Seti
 
 ### Kaynak
-Proje için özel olarak hazırlanmış, temel vücut ağırlığı egzersizlerini detaylandıran Markdown (.md) dosyaları koleksiyonu. Bu koleksiyon, Kaggle üzerinde **hareket-ansiklopedisi-dataset** adıyla bir veri seti olarak barındırılmıştır.
+
+Proje için özel olarak hazırlanmış, temel vücut ağırlığı egzersizlerini detaylandıran Markdown (.md) dosyaları koleksiyonu. Bu koleksiyon, bu **GitHub deposundaki `hareket_ansiklopedisi` klasöründe** bulunmaktadır.
 
 ### İçerik
+
 Her bir .md dosyası, belirli bir egzersize odaklanarak; egzersizin adını, genel bir açıklamasını, "Nasıl Yapılır" başlığı altında adım adım talimatlarını, hedeflenen ana kas gruplarını ve egzersizin önerilen zorluk seviyesini (örn: Başlangıç) içermektedir.
 
 ### Boyut ve Yapı
+
 Veri seti, toplam **45 adet** bağımsız .md egzersiz tanım dosyasından oluşmaktadır. Her dosya, RAG sistemi tarafından tek bir bilgi birimi (chunk) olarak işlenmiştir.
 
 ### Kullanım Amacı
+
 Bu Markdown dosyaları, RAG sisteminin bilgi çekirdeğini (knowledge base) oluşturur. LLM, kullanıcı sorularını cevaplarken yalnızca bu dosyalardan retriever tarafından getirilen ilgili metin parçalarını referans alır.
 
 ## ⚙️ Çözüm Mimarisi ve Kullanılan Yöntemler
@@ -105,8 +108,6 @@ Projenin çözümü, **Retrieval-Augmented Generation (RAG)** mimarisine dayanma
 - git (depoyu klonlamak için)
 - Google Gemini API Anahtarı
 
-## 🚀 Kurulum ve Çalıştırma
-
 ### 1. Depoyu Klonlayın
 ```bash
 git clone https://github.com/oguzhan-evci/Form-Rehberim-Chatbot.git
@@ -158,8 +159,6 @@ python app.py
 
 Uygulama genellikle `http://127.0.0.1:7860` adresinde çalışacaktır.
 
----
-
 ## ❓ Kullanım Örnekleri
 
 Uygulama arayüzüne gittikten sonra, sohbet kutusuna aşağıdaki gibi sorular sorabilirsiniz:
@@ -186,16 +185,12 @@ Uygulama arayüzüne gittikten sonra, sohbet kutusuna aşağıdaki gibi sorular 
 **Kullanıcı:** Bench Press hakkında bilgin var mı?  
 **Asistan:** Üzgünüm, "Bench Press" hakkında doğrudan bir bilgiye sahip değilim. Ben, yalnızca vücut ağırlığı egzersizleri ansiklopedisindeki bilgilere dayanarak yanıt verebiliyorum. Başka bir vücut ağırlığı egzersizi hakkında bilgi almak ister misin?
 
----
-
 ## 📜 Lisans
 
 Bu proje **MIT Lisansı** altında lisanslanmıştır - daha fazla bilgi için [LICENSE](LICENSE) dosyasına bakın.
-
----
 
 ## 🌐 Canlı Demo
 
 Uygulamanın çalışan versiyonuna Hugging Face Spaces üzerinden erişebilirsiniz:
 
-🔗 [Form Rehberi App - Hugging Face Space](https://huggingface.co/spaces/oguzhanevci/FormRehberimguncel)
+🔗 [Form Rehberi App - Hugging Face Space](https://huggingface.co/spaces/form-rehberi)
