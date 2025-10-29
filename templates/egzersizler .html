@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %}{{ lang_data['exercise_list_title'] }}{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+    <div class="page-content exercise-list">
+        <h2>{{ lang_data['exercise_list_title'] }}</h2>
+        <p>{{ lang_data['exercise_list_intro'] }}</p>
+        
+        {% if exercises %}
+            <ul>
+                {% for exercise in exercises %}
+                    <li>{{ exercise }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ lang_data.get('exercise_list_empty', 'Egzersiz listesi yüklenemedi.') }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+
+{% block title %}{{ lang_data['about_title'] }}{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <h2>{{ lang_data['about_page_heading'] }}</h2>
+        
+        <p>{{ lang_data['about_paragraph_1'] }}</p>
+        <p>{{ lang_data['about_paragraph_2'] }}</p>
+        
+        <h3>{{ lang_data['about_contact_heading'] }}</h3>
+        <p>{{ lang_data['about_contact_info'] }}</p>
+    </div>
+</div>
+{% endblock %}

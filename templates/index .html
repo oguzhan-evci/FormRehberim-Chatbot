@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ lang_data['title'] }} - {{ lang_data.get('nav_home', 'Sohbet') }}{% endblock %}
+
+{% block content %}
+<div class="chat-area">
+
+    {% if not chat_history %}
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1 class="welcome-title-main">Merhaba! 👋</h1>
+            <h2 class="welcome-subtitle-main">
+                <span class="gradient-text">{{ lang_data['chatbot_subtitle'] }}</span>
+            </h2>
+            <p class="welcome-description">
+                {{ lang_data['welcome_message'] | safe }}
+            </p>
+
+            <div class="suggestions">
+                <div class="suggestion-card" onclick="sendSuggestion('Squat nedir ve hangi kasları çalıştırır?')">
+                    <div class="suggestion-icon">🎯</div>
+                    <div class="suggestion-title">Hareket Tanımı</div>
+                    <p class="suggestion-text">Egzersiz hareketlerinin ne olduğunu öğrenin</p>
+                </div>
+                <div class="suggestion-card" onclick="sendSuggestion('Plank nasıl yapılır? Adım adım anlat')">
+                    <div class="suggestion-icon">⚡</div>
+                    <div class="suggestion-title">Teknik Bilgi</div>
+                    <p class="suggestion-text">Hareketlerin doğru yapılış tekniği</p>
+                </div>
+                <div class="suggestion-card" onclick="sendSuggestion('Lunge hangi kasları çalıştırır?')">
+                    <div class="suggestion-icon">💪</div>
+                    <div class="suggestion-title">Kas Grupları</div>
+                    <p class="suggestion-text">Hangi hareketler hangi kasları çalıştırır</p>
+                </div>
+                <div class="suggestion-card" onclick="sendSuggestion('Plank egzersizinin zorluk seviyesi nedir?')">
+                    <div class="suggestion-icon">📈</div> 
+                    <div class="suggestion-title">Zorluk Seviyesi</div> 
+                    <p class="suggestion-text">Hareketin hangi seviyeye uygun olduğunu öğrenin</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="messages-container" id="messagesContainer">
+        {% for q, a in chat_history %}
+            {% if q %}
+            <div class="message user">
+                <div class="message-avatar">👤</div>
+                <div class="message-content">
+                    <div>{{ q }}</div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if a %}
+            <div class="message bot">
+                <div class="message-avatar">💪</div>
+                <div class="message-content">
+                    <div>{{ a | safe }}</div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+        <div class="spinner"></div>
+        <span>{{ lang_data['loading_text'] }}</span>
+    </div>
+
+</div>
+
+<form method="POST" action="/#messagesContainer" id="chatForm" class="input-area-fixed">
+    <div class="input-wrapper">
+        <div class="input-container">
+            <input type="text" id="messageInput" name="question" placeholder="{{ lang_data['input_placeholder'] }}" autocomplete="off">
+            <button type="submit" class="send-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                <span>{{ lang_data['send_button'] }}</span>
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    function sendSuggestion(text) {
+        const input = document.getElementById('messageInput');
+        input.value = text;
+        document.getElementById('chatForm').submit();
+    }
+
+    document.getElementById('messageInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            document.getElementById('chatForm').submit();
+        }
+    });
+
+    window.addEventListener('load', function() {
+        const messagesContainer = document.getElementById('messagesContainer');
+        if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    });
+
+    document.getElementById('chatForm').addEventListener('submit', function(e) {
+        const input = document.getElementById('messageInput');
+        if (input.value.trim() === "") {
+            e.preventDefault();
+            return;
+        }
+        document.getElementById('loadingIndicator').style.display = 'flex';
+        document.querySelector('.send-btn').disabled = true;
+    });
+</script>
+{% endblock %}

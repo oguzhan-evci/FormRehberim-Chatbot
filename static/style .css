@@ -1,0 +1,649 @@
+/* --- Genel Ayarlar ve Font --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1e2936; /* Ana arka plan (Koyu Mavi-Gri) */
+    color: #e0e0e0;
+    height: 100vh;
+    overflow: hidden; /* Ana sayfanın kaymasını engeller */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    background: #1e2936;
+}
+
+/* --- Header, Logo ve Navigasyon --- */
+.header {
+    background: rgba(15, 23, 42, 0.85); /* Hafif şeffaf koyu arka plan */
+    backdrop-filter: blur(16px);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(52, 152, 219, 0.15);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0; /* Header'ın küçülmesini engeller */
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: -0.5px;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff; /* Emoji/ikon rengi */
+}
+
+.nav-menu {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-link, .nav-button {
+    color: #9ca3af; /* Pasif link rengi */
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 10px 16px;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link:hover {
+    color: #3498db; /* Vurgu rengi */
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.nav-link.active {
+    color: #ffffff;
+    background: rgba(52, 152, 219, 0.2);
+    font-weight: 600;
+}
+
+/* Navigasyondaki formlar (örn: sohbeti temizle) */
+.nav-form {
+    margin: 0;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-button.clear-chat-btn:hover {
+    color: #e74c3c; /* Kırmızı vurgu */
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.nav-button span {
+    display: inline; /* Varsayılan */
+}
+
+/* Dil Değiştirici (Eski projenizden uyarlandı) */
+.lang-switcher {
+    display: flex;
+    gap: 6px;
+    margin-left: 16px;
+    border-left: 1px solid #334155;
+    padding-left: 20px;
+}
+
+.lang-btn {
+    padding: 6px 10px;
+    background-color: #334155;
+    color: #e0e0e0;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border: 1px solid #475569;
+    font-size: 0.9em;
+}
+
+.lang-btn:hover {
+    background-color: #475569;
+    color: white;
+}
+
+.lang-btn.active {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: white;
+}
+
+/* Mobil Navigasyon (Hamburger Menü) */
+.mobile-nav-toggle {
+    display: none; /* Varsayılan olarak gizli */
+    color: #9ca3af;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+/* --- Ana İçerik Alanı --- */
+.main-content {
+    flex: 1; /* Kalan tüm alanı kapla */
+    overflow: hidden; /* Kaydırmayı bu alana devreder */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Sohbet Alanı (index.html) --- */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Sadece bu alan kaydırılabilir */
+}
+
+/* Karşılama Ekranı (Sohbet boşken) */
+.welcome-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; satırı silindi */
+    padding: 40px 60px 200px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.welcome-content {
+    width: 100%;
+    max-width: 900px;
+    animation: fadeIn 0.5s ease;
+}
+
+.welcome-title-main {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #ffffff;
+}
+
+.welcome-subtitle-main {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.welcome-subtitle-main .gradient-text {
+    background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.welcome-description {
+    font-size: 16px;
+    color: #94a3b8; /* Açık gri */
+    margin-bottom: 48px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.suggestions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.suggestion-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid #334155;
+    padding: 28px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left; /* Sola hizalı */
+}
+
+.suggestion-card:hover {
+    background: rgba(51, 65, 85, 0.8);
+    border-color: rgba(52, 152, 219, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.suggestion-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.suggestion-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin-bottom: 8px;
+}
+
+.suggestion-text {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+/* Mesaj Balonları (Sohbet doluyken) */
+.messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 60px 200px; /* Alttaki input bar için boşluk */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.message {
+    display: flex;
+    gap: 16px;
+    max-width: 75%;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message.bot {
+    align-self: flex-start;
+}
+
+.message-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.message.user .message-avatar {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.message.bot .message-avatar {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.message-content {
+    background: rgba(30, 41, 59, 0.6); /* Bot mesaj arka planı */
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    line-height: 1.7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.message.user .message-content {
+    background: rgba(52, 152, 219, 0.25); /* User mesaj arka planı */
+    border-color: rgba(52, 152, 219, 0.4);
+}
+
+/* Bot cevaplarındaki Markdown formatlaması */
+.message-content p { margin-bottom: 0.5em; }
+.message-content ul, .message-content ol { margin: 0.5em 0 0.5em 20px; }
+.message-content li { margin-bottom: 0.25em; }
+.message-content strong, .message-content b { font-weight: 600; color: #fff; }
+.message-content em, .message-content i { font-style: italic; }
+.message-content a { color: #34aadc; text-decoration: none; }
+.message-content a:hover { text-decoration: underline; }
+
+/* Yükleme Göstergesi (Spinner) */
+.loading-indicator {
+    display: none; /* JS ile 'flex' yapılır */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 1.1em;
+    gap: 12px;
+    /* Sabit input bar'ın hemen üstünde görünmesi için: */
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 120px; /* Input bar yüksekliği + biraz boşluk */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* --- Sabit Mesaj Giriş Alanı (index.html) --- */
+.input-area-fixed {
+    position: relative; /* base.html'deki main-content'e göre konumlanır */
+    background: #1e2936;
+    padding: 20px 40px;
+    border-top: 1px solid rgba(71, 85, 105, 0.3);
+    z-index: 100;
+    flex-shrink: 0; /* Küçülmesini engeller */
+}
+
+.input-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.input-container {
+    display: flex;
+    gap: 12px;
+    align-items: stretch; /* Butonun input ile aynı yükseklikte olmasını sağlar */
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 6px 8px 6px 20px;
+    transition: all 0.3s ease;
+}
+
+.input-container:focus-within {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    background: rgba(30, 41, 59, 0.95);
+}
+
+.input-container input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #e0e0e0;
+    font-size: 15px;
+    padding: 14px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.input-container input::placeholder {
+    color: #64748b;
+}
+
+.send-btn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.5);
+}
+
+.send-btn:active {
+    transform: translateY(0);
+}
+
+.send-btn:disabled {
+    background: #475569;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* --- Statik Sayfa Stilleri (About, Egzersiz Listesi) --- */
+.page-content-wrapper {
+    flex: 1;
+    overflow-y: auto; /* Statik sayfalar kaydırılabilir */
+    padding: 40px 60px;
+}
+
+.page-content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(30, 41, 59, 0.6);
+    padding: 30px 40px;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    animation: fadeIn 0.4s ease;
+}
+
+.page-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 15px;
+}
+
+.page-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.page-content p {
+    font-size: 16px;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+/* Egzersiz Listesi Stilleri */
+.page-content.exercise-list ul {
+    list-style: none;
+    padding: 0;
+    columns: 2; /* Listeyi 2 sütuna böl */
+    gap: 15px;
+}
+
+.page-content.exercise-list li {
+    background: #1e2936;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.page-content.exercise-list li:hover {
+    background: #334155;
+    border-color: #3498db;
+    color: #fff;
+}
+
+
+/* --- Scrollbar Stili --- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(52, 152, 219, 0.3);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(52, 152, 219, 0.5);
+}
+
+/* --- Mobil Uyum (Responsive) --- */
+@media (max-width: 968px) {
+    body {
+        overflow: auto; /* Mobilde body kaydırılabilir */
+    }
+    .container {
+        height: auto;
+        min-height: 100vh;
+    }
+    .header {
+        padding: 16px 24px;
+        flex-wrap: wrap; /* Gerekirse alt satıra kaydır */
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .nav-menu {
+        /* Navigasyon menüsünü varsayılan olarak gizle */
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        position: absolute;
+        top: 73px; /* Header yüksekliği */
+        left: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(52, 152, 219, 0.15);
+    }
+
+    .nav-menu.active {
+        display: flex; /* Tıklandığında göster */
+    }
+
+    .nav-link, .nav-form, .lang-switcher {
+        width: 100%;
+        text-align: center;
+        padding: 10px 20px;
+        margin: 0;
+        border-left: none; /* Kenar çizgilerini kaldır */
+        padding-left: 20px;
+    }
+    .nav-button span {
+        display: inline; /* Mobilde metni göster */
+    }
+
+    .mobile-nav-toggle {
+        display: block; /* Hamburger menü ikonunu göster */
+    }
+
+    .messages-container, .welcome-screen {
+        padding: 30px 24px 180px; /* Kenar boşluklarını azalt */
+    }
+
+    .page-content-wrapper {
+        padding: 30px 24px;
+    }
+
+    .suggestions {
+        grid-template-columns: 1fr; /* Önerileri tek sütun yap */
+    }
+
+    .input-area-fixed {
+        padding: 15px 24px;
+    }
+    .page-content.exercise-list ul {
+        columns: 1; /* Listeyi tek sütun yap */
+    }
+}
+
+@media (max-width: 640px) {
+    .welcome-title-main {
+        font-size: 32px;
+    }
+    .welcome-subtitle-main {
+        font-size: 24px;
+    }
+    .message {
+        max-width: 95%; /* Mesaj balonları daha geniş */
+    }
+    .header {
+        padding: 14px 20px;
+    }
+     .nav-menu.active {
+        top: 67px; /* Header yüksekliği */
+    }
+    .messages-container, .welcome-screen {
+        padding: 24px 20px 160px;
+    }
+    .page-content-wrapper {
+        padding: 24px 15px;
+    }
+     .page-content {
+        padding: 20px;
+    }
+    .input-area-fixed {
+        padding: 10px 15px;
+    }
+    .input-container {
+        padding: 4px 6px 4px 15px;
+    }
+    .send-btn {
+        padding: 10px 16px;
+    }
+    .send-btn span {
+        display: none; /* Mobilde 'Gönder' yazısını gizle, sadece ikon */
+    }
+}

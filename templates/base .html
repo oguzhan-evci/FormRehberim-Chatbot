@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ lang_data['title'] }}{% endblock %}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="{{ url_for('home') }}" class="logo">
+                {{ lang_data['title'] }}
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="{{ url_for('home') }}" class="nav-link {% if request.path == url_for('home') %}active{% endif %}">
+                    <i class="fas fa-comment-dots"></i> <span>{{ lang_data.get('nav_home', 'Sohbet') }}</span>
+                </a>
+                <a href="{{ url_for('exercise_list') }}" class="nav-link {% if request.path == url_for('exercise_list') %}active{% endif %}">
+                    <i class="fas fa-list-ul"></i> <span>{{ lang_data.get('nav_exercises', 'Egzersiz Listesi') }}</span>
+                </a>
+                <a href="{{ url_for('about') }}" class="nav-link {% if request.path == url_for('about') %}active{% endif %}">
+                    <i class="fas fa-info-circle"></i> <span>{{ lang_data.get('nav_about', 'Hakkında') }}</span>
+                </a>
+                
+                <form action="/clear_chat" method="post" class="nav-form">
+                    <button type="submit" class="nav-button clear-chat-btn" title="{{ lang_data['clear_chat_button'] }}">
+                        <i class="fas fa-trash-alt"></i> <span>{{ lang_data['clear_chat_button'] }}</span>
+                    </button>
+                </form>
+
+                <div class="lang-switcher">
+                    <a href="{{ url_for('set_language', lang_code='tr') }}" class="lang-btn {% if lang == 'tr' %}active{% endif %}">TR</a>
+                    <a href="{{ url_for('set_language', lang_code='en') }}" class="lang-btn {% if lang == 'en' %}active{% endif %}">EN</a>
+                </div>
+            </nav>
+            <div class="mobile-nav-toggle" id="mobileNavToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <main class="main-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+    </div>
+
+    <script>
+        // Mobil menü JS
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('mobileNavToggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (toggleButton && navMenu) {
+                toggleButton.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+    
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
